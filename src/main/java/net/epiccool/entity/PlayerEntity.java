@@ -72,17 +72,17 @@ public class PlayerEntity extends Entity {
     }
 
     public void getPlayerTexture() {
-        try {
-            d1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_1"));
-            d2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_2"));
-            l1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_1"));
-            l2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_2"));
-            r1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_1"));
-            r2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_2"));
-            u1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_1"));
-            u2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_2"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            d1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_1"));
+//            d2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_2"));
+//            l1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_1"));
+//            l2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_2"));
+//            r1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_1"));
+//            r2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_2"));
+//            u1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_1"));
+//            u2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_2"));
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }
