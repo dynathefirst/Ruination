@@ -7,46 +7,68 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Objects;
 
 public class PlayerEntity extends Entity {
     Window w;
     InputHandler i;
 
+    public final int sX;
+    public final int sY;
+
     public PlayerEntity(Window w, InputHandler i) {
         this.w = w;
         this.i = i;
+
+        sX = w.sw / 2 - (w.ts / 2);
+        sY = w.sl / 2 - (w.ts / 2);
+
+        hitbox = new Rectangle(8, 16, 32, 32);
 
         setAttributes();
         getPlayerTexture();
     }
 
     public void setAttributes() {
-        x = 100;
-        y = 100;
-        speed = 4;
+        wX = (w.ts * 9);
+        wY = (w.ts * 8);
+        speed = 5;
         facing = "down";
     }
 
     public void update() {
-        if (i.up) {
-            facing = "up";
-            y -= speed;
-        }
+        if (i.up || i.down || i.left || i.right) {
+            if (i.up) {
+                facing = "up";
+                wY -= speed;
+            }
 
-        if (i.down) {
-            facing = "down";
-            y += speed;
-        }
+            if (i.down) {
+                facing = "down";
+                wY += speed;
+            }
 
-        if (i.left) {
-            facing = "left";
-            x -= speed;
-        }
+            if (i.left) {
+                facing = "left";
+                wX -= speed;
+            }
 
-        if (i.right) {
-            facing = "right";
-            x += speed;
+            if (i.right) {
+                facing = "right";
+                wX += speed;
+            }
+
+            canCollide = false;
+            w.c.checkCollision(this);
+
+            counter++;
+            if (counter > 12) {
+                if (num == 1) {
+                    num = 2;
+                } else if (num == 2) {
+                    num = 1;
+                }
+                counter = 0;
+            }
         }
     }
 
@@ -55,34 +77,59 @@ public class PlayerEntity extends Entity {
 
         switch (facing) {
             case "down":
-                img = d1;
+                if (num == 1) {
+                    img = d1;
+                } else if (num == 2) {
+                    img = d2;
+                }/* else {
+                    img = d;
+                }*/
                 break;
             case "left":
-                img = l1;
+                if (num == 1) {
+                    img = l1;
+                } else if (num == 2) {
+                    img = l2;
+                }/* else {
+                    img = d;
+                }*/
                 break;
             case "right":
-                img = r1;
+                if (num == 1) {
+                    img = r1;
+                } else if (num == 2) {
+                    img = r2;
+                }/* else {
+                    img = d;
+                }*/
                 break;
             case "up":
-                img = u1;
+                if (num == 1) {
+                    img = u1;
+                } else if (num == 2) {
+                    img = u2;
+                }/* else {
+                    img = d;
+                }*/
                 break;
         }
-
-        g2.drawImage(img, x, y, w.ts, w.ts, null);
+        g2.drawRect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+        g2.drawImage(img, sX, sY, w.ts, w.ts, null);
     }
 
     public void getPlayerTexture() {
-//        try {
-//            d1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_1"));
-//            d2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_down_2"));
-//            l1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_1"));
-//            l2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_left_2"));
-//            r1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_1"));
-//            r2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_right_2"));
-//            u1 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_1"));
-//            u2 = ImageIO.read(getClass().getResourceAsStream("/sprites/player/player_up_2"));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            //d = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/default_player.png"));
+            d1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_down_1.png"));
+            d2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_down_2.png"));
+            l1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_left_1.png"));
+            l2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_left_2.png"));
+            r1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_right_1.png"));
+            r2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_right_2.png"));
+            u1 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_up_1.png"));
+            u2 = ImageIO.read(getClass().getClassLoader().getResourceAsStream("sprites/entity/player/player_up_2.png"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

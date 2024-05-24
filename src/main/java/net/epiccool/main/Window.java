@@ -1,7 +1,9 @@
 package net.epiccool.main;
 
+import net.epiccool.entity.CollisionDetector;
 import net.epiccool.entity.PlayerEntity;
 import net.epiccool.input.InputHandler;
+import net.epiccool.tile.Tiles;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,23 +12,27 @@ public class Window extends JPanel implements Runnable {
     final int ots = 16;
     final int s = 3;
     public final int ts = (ots * s);
-    final int msw = 16;
-    final int msl = 12;
-    final int sw = (ts * msw);
-    final int sl = (ts * msl );
+    public final int msw = 16;
+    public final int msl = 12;
+    public final int sw = (ts * msw);
+    public final int sl = (ts * msl);
+    
+    public final int mwc = 20;
+    public final int mwr = 20;
+    public final int ww = (ts * mwc);
+    public final int wh = (ts * mwr);
+
     int frames = 60;
 
+    Tiles tiles = new Tiles(this);
     InputHandler i = new InputHandler();
     Thread t;
-    PlayerEntity player = new PlayerEntity(this, i);
-
-    int pX = 100;
-    int pY = 100;
-    int pS = 4;
+    public CollisionDetector c = new CollisionDetector(this);
+    public PlayerEntity player = new PlayerEntity(this, i);
 
     public Window() {
         this.setPreferredSize(new Dimension(sw, sl));
-        this.setBackground(Color.YELLOW);
+        this.setBackground(Color.GREEN);
         this.setDoubleBuffered(true);
         this.addKeyListener(i);
         this.setFocusable(true);
@@ -75,6 +81,7 @@ public class Window extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
+        tiles.draw(g2);
         player.draw(g2);
         g2.dispose();
     }
