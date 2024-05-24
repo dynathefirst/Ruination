@@ -7,7 +7,7 @@ public class Main {
         JFrame f = new JFrame();
         f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
         f.setResizable(false);
-        f.setTitle("Ruination - 20240524");
+        f.setTitle("Ruination");
 
         Window w = new Window();
         f.add(w);
