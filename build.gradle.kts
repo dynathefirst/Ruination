@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "net.epiccool"
-version = "20240524"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()

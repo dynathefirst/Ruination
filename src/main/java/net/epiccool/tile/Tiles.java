@@ -16,7 +16,7 @@ public class Tiles {
 
     public Tiles(Window w) {
         this.w = w;
-        tile = new Tile[4];
+        tile = new Tile[5];
         mapNum = new int[w.mwc][w.mwr];
         getTexture();
         load("maps/world_001.txt");
@@ -29,15 +29,17 @@ public class Tiles {
 
             tile[1] = new Tile();
             tile[1].img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/planks.png"));
-            tile[1].canCollide = false;
+            tile[1].canCollide = true;
 
             tile[2] = new Tile();
             tile[2].img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/door.png"));
-            tile[2].canCollide = false;
 
             tile[3] = new Tile();
             tile[3].img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/shingles.png"));
-            tile[3].canCollide = false;
+            tile[3].canCollide = true;
+
+            tile[4] = new Tile();
+            tile[4].img = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/docks.png"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -66,6 +68,7 @@ public class Tiles {
                     vRow = 0;
                     row++;
                 }
+                b.close();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
